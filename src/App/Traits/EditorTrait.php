@@ -23,6 +23,11 @@ trait EditorTrait{
 	    ];
 
 	    $model->save();
+		
+	    $path = public_path("plugin_html/" . tenant('id') . "/" . $model->slug . ".html");
+            $myfile = fopen(trim($path),"w") or die("Unable to open file!");
+            fwrite($myfile, $model->content);
+            fclose($myfile);
 
 	    return response()->noContent(200);
 	}
